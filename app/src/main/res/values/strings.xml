@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ToolStore</string>
+    <string name="str_welcome">Welcome to Tool Store</string>
+    <string name="str_id">ID</string>
+    <string name="str_password">Password</string>
+    <string name="str_login">Log in</string>
+    <string name="str_register">Register</string>
+    <string name="str_name">Name</string>
+    <string name="str_city">City</string>
+    <string name="str_zipCode">ZIP Code</string>
+    <string name="str_contact">Contact Number</string>
+    <string name="type1">Machine</string>
+    <string name="type2">Tools</string>
+    <string name="type3">Others</string>
+    <string name="type4">Check</string>
+    <string name="str_userInfo">User Info</string>
+    <string name="str_addTools">Add Tools</string>
+    <string name="str_checkCart">Check Orders</string>
+</resources>
