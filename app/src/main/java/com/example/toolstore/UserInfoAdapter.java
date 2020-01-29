@@ -34,8 +34,8 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.UserIn
         holder.tv_userName.setText(arrayList.get(position).getUserId());
         holder.tv_userID.setText(arrayList.get(position).getUserName());
         holder.tv_userCity.setText(arrayList.get(position).getUserCity());
-        holder.tv_userZIPCode.setText(arrayList.get(position).getUserZIPCode());
-        holder.tv_userContact.setText(arrayList.get(position).getUserContact());
+        holder.tv_userZIPCode.setText(String.valueOf(arrayList.get(position).getUserZIPCode()));
+        holder.tv_userContact.setText(String.valueOf(arrayList.get(position).getUserContact()));
     }
 
     @Override

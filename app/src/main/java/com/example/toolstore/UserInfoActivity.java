@@ -5,12 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +23,6 @@ public class UserInfoActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<User> arrayList;
-    private TextView tv_ex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,35 +35,59 @@ public class UserInfoActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>(); //user info array list (to adapter)
 
-        Response.Listener<String> responseListner = new Response.Listener<String>() {
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if(success)
-                    {
-                        String userID = jsonObject.getString("userID");
-                        String userName = jsonObject.getString("userName");
-                        String userCity = jsonObject.getString("city");
-                        String userZIPCode = jsonObject.getString("ZIPCode");
-                        String userContact = jsonObject.getString("contact");
+                    JSONArray jsonArray = new JSONArray(response);
+                    JSONObject jsonObject;
+                    Log.e("length", jsonArray.length()+"");
+                    String userID = null, userName = null, userCity = null, userZIPCode = null;
 
-                        User user = new User();
-                        user.setUserId(userID);
-                        user.setUserName(userName);
-                        user.setUserCity(userCity);
-                        user.setUserZIPCode(Integer.parseInt(userZIPCode));
-                        user.setUserContact(Integer.parseInt(userContact));
-                        arrayList.add(user);
+                    for(int i = 1; i < jsonArray.length(); ++i) {
+                        switch (i%5)
+                        {
+                            case 1:
+                                jsonObject = jsonArray.getJSONObject(i);
+                                userID = jsonObject.getString("userID");
+                                break;
+                            case 2:
+                                jsonObject = jsonArray.getJSONObject(i);
+                                userName = jsonObject.getString("userName");
+                                break;
+                            case 3:
+                                jsonObject = jsonArray.getJSONObject(i);
+                                userCity = jsonObject.getString("city");
+                                break;
+                            case 4:
+                                jsonObject = jsonArray.getJSONObject(i);
+                                userZIPCode = jsonObject.getString("ZIPCode");
+                                break;
+
+                                default:
+                                    jsonObject = jsonArray.getJSONObject(i);
+                                    String userContact = jsonObject.getString("contact");
+                                    User user = new User();
+                                    user.setUserId(userID);
+                                    user.setUserName(userName);
+                                    user.setUserCity(userCity);
+                                    user.setUserZIPCode(Integer.parseInt(userZIPCode));
+                                    user.setUserContact(Integer.parseInt(userContact));
+                                    arrayList.add(user);
+
+                        }
                     }
+                    adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
-        UserInfoRequest userInfoRequest = new UserInfoRequest(responseListner);
+        UserInfoRequest userInfoRequest = new UserInfoRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(UserInfoActivity.this);
         queue.add(userInfoRequest);
+
+        adapter = new UserInfoAdapter(arrayList, this);
+        recyclerView.setAdapter(adapter);
     }
 }
