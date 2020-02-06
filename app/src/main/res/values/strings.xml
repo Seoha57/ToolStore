@@ -15,5 +15,13 @@
     <string name="type4">Check</string>
     <string name="str_userInfo">User Info</string>
     <string name="str_addTools">Add Tools</string>
+    <string name="str_add">ADD</string>
     <string name="str_checkCart">Check Orders</string>
+    <string name="str_toolName">Tool Name</string>
+    <string name="str_toolSize">Size</string>
+    <string name="str_toolAmount">Amount</string>
+    <string name="str_toolPrice">Price</string>
+    <string name="str_toolMaker">Maker</string>
+    <string name="str_category">Category</string>
+    <string name="str_describe">Describe</string>
 </resources>

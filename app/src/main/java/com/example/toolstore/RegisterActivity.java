@@ -70,7 +70,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 };
-
                 // Send request to server with Volley.
                 RegisterRequest registerRequest = new RegisterRequest(userID, userPassword, userName, city, zipCode, contact, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);

@@ -23,8 +23,8 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="10dp"
-                android:text="Name"
-                android:textSize="20dp"/>
+                android:text="@string/str_name"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/tv_userContact"
@@ -32,8 +32,8 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="Contact"
-                android:textSize="15dp"/>
+                android:text="@string/str_contact"
+                android:textSize="15sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -46,24 +46,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="ID"
-                android:textSize="15dp"/>
+                android:text="@string/str_id"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_userCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="City"
-                android:textSize="15dp"/>
+                android:text="@string/str_city"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_userZIPCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="ZIPCode"
-                android:textSize="15dp" />
+                android:text="@string/str_zipCode"
+                android:textSize="15sp" />
         </LinearLayout>
 
     </LinearLayout>

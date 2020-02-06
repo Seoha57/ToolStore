@@ -11,6 +11,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv_id;
@@ -21,16 +28,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv_id = (TextView)findViewById(R.id.tv_id);
-        btn_1 = (Button)findViewById(R.id.btn_1);
-        btn_2 = (Button)findViewById(R.id.btn_2);
-        btn_3 = (Button)findViewById(R.id.btn_3);
-        btn_4 = (Button)findViewById(R.id.btn_4);
+        tv_id = findViewById(R.id.tv_id);
+        btn_1 = findViewById(R.id.btn_1);
+        btn_2 = findViewById(R.id.btn_2);
+        btn_3 = findViewById(R.id.btn_3);
+        btn_4 = findViewById(R.id.btn_4);
 
         Intent intent = getIntent();
         String userID = intent.getStringExtra("userID");
 
-        tv_id.setText(userID);
+        tv_id.setText("Hello, " + userID);
 
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +79,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(getApplicationContext(), "Hello " + tv_id.getText().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), tv_id.getText().toString(), Toast.LENGTH_SHORT).show();
+
+        //Create User's Cart
+        Response.Listener<String> stringListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("Create Table Response", "Active");
+            }
+        };
+        // Send request to server with Volley.
+        CreateNewCustomerTable createNewCustomerTable = new CreateNewCustomerTable(userID, stringListener);
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        queue.add(createNewCustomerTable);
     }
 }

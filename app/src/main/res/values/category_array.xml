@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="toolCategory">
+        <item>
+            BOLTS AND NUTS
+        </item>
+        <item>
+            TOOLS
+        </item>
+        <item>
+            OTHERS
+        </item>
+    </string-array>
+</resources>

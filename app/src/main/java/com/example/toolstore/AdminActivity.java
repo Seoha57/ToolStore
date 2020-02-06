@@ -1,8 +1,6 @@
 package com.example.toolstore;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +39,8 @@ public class AdminActivity extends AppCompatActivity {
         btn_addTools.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent change = new Intent(AdminActivity.this, AddTools.class);
+                startActivity(change);
             }
         });
 
