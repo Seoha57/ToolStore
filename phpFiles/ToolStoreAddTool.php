@@ -16,13 +16,11 @@
 		$toolPrice = $_POST["price"];
 
 		if ($tableName == "BOLTS AND NUTS")
-			$tableName = "B&Ntemp";
+			$tableName = "BOLTS&NUTS";
 		elseif ($tableName == 'TOOLS')
-		{
-		}
+			$tableName = "TOOLS";
 		elseif ($tableName == 'OTHERS')
-		{
-		}
+			$tableName = "OTHERS";
 
 		$statement = mysqli_prepare($con, "INSERT INTO `$tableName` (name, maker, size, amount, price) VALUES (?,?,?,?,?)");
 		mysqli_stmt_bind_param($statement, "sssii", $toolName, $toolMaker, $toolSize, $toolAmount, $toolPrice);

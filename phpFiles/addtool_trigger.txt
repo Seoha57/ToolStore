@@ -1,0 +1,23 @@
+IF (EXISTS (SELECT 1 FROM `TOOLS_TABLE` WHERE NEW.name = name AND NEW.maker = maker AND NEW.size = size)) THEN
+UPDATE `TOOLS_TABLE` SET amount=amount+NEW.amount, price=NEW.price WHERE NEW.name = name AND NEW.maker = maker AND NEW.size = size;
+ELSE
+INSERT INTO `TOOLS_TABLE` VALUES (NEW.name, NEW.maker, NEW.size, NEW.amount, NEW.price);
+END IF;
+
+IF (EXISTS (SELECT 1 FROM `OTHERS_TABEL` WHERE NEW.name = name AND NEW.maker = maker AND NEW.size = size)) THEN
+UPDATE `OTHERS_TABEL` SET amount=amount+NEW.amount, price=NEW.price WHERE NEW.name = name AND NEW.maker = maker AND NEW.size = size;
+ELSE
+INSERT INTO `OTHERS_TABEL` VALUES (NEW.name, NEW.maker, NEW.size, NEW.amount, NEW.price);
+END IF;
+
+IF (EXISTS (SELECT 1 FROM `B&N_TABLE` WHERE NEW.name = name AND NEW.maker = maker AND NEW.size = size)) THEN 
+UPDATE `B&N_TABLE` SET amount=amount+NEW.amount, price=NEW.price WHERE NEW.name = name AND NEW.maker = maker AND NEW.size = size; 
+ELSE 
+INSERT INTO `B&N_TABLE` VALUES (NEW.name, NEW.maker, NEW.size, NEW.amount, NEW.price); 
+END IF;
+
+INSERT INTO `TOOLS`(`name`, `maker`, `size`, `amount`, `price`) VALUES ('hi', 'kor', '13', 3, 1500);
+
+INSERT INTO `OTHERS`(`name`, `maker`, `size`, `amount`, `price`) VALUES ('hi', 'kor', '13', 3, 1500);
+
+INSERT INTO `BOLTS&NUTS`(`name`, `maker`, `size`, `amount`, `price`) VALUES ('hi', 'kor', '13', 3, 1500);

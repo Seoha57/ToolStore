@@ -50,7 +50,8 @@
         android:text="@string/str_login"
         app:layout_constraintEnd_toEndOf="@+id/et_password"
         app:layout_constraintStart_toStartOf="@+id/et_password"
-        app:layout_constraintTop_toBottomOf="@+id/et_password" />
+        app:layout_constraintTop_toBottomOf="@+id/et_password"
+        android:background="@drawable/custom_button2"/>
 
     <Button
         android:id="@+id/btn_register"
@@ -60,7 +61,8 @@
         android:text="@string/str_register"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        android:background="@drawable/custom_button2"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
