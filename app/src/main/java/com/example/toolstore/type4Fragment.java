@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 public class type4Fragment extends Fragment {
 
     public type4Fragment() {
-
     }
 
     @Nullable
