@@ -1,9 +1,11 @@
 package com.example.toolstore;
 
 import android.content.Context;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemInfoViewHolder> {
 
     private ArrayList<Items> itemsArrayList;
+    SparseBooleanArray itemStateArray = new SparseBooleanArray();
 
     public ItemInfoAdapter(ArrayList<Items> arrayList)
     {
@@ -51,4 +54,39 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
             this.tv_toolPrice = itemView.findViewById(R.id.tv_toolPrice);
         }
     }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        CheckedTextView checkedTextView;
+
+        ViewHolder(View itemView)
+        {
+            super(itemView);
+            checkedTextView = itemView.findViewById(R.id.chk_itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        void bind(int pos)
+        {
+            if(!itemStateArray.get(pos, false))
+                checkedTextView.setChecked(false);
+            else
+                checkedTextView.setChecked(true);
+        }
+        @Override
+        public void onClick(View v) {
+            int itemPos = getAdapterPosition();
+            if(!itemStateArray.get(itemPos, false))
+            {
+                checkedTextView.setChecked(true);
+                itemStateArray.put(itemPos, true);
+            }
+            else
+            {
+                checkedTextView.setChecked(false);
+                itemStateArray.put(itemPos, false);
+            }
+        }
+    }
+
+
 }

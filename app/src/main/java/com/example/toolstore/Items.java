@@ -6,6 +6,7 @@ public class Items {
     private String itemSize;
     private int itemAmount;
     private int itemPrice;
+    private boolean isChecked;
 
     public Items() {
     }
@@ -48,5 +49,13 @@ public class Items {
 
     public void setItemPrice(int itemPrice) {
         this.itemPrice = itemPrice;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

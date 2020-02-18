@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/custom_button2"
     android:layout_marginTop="5dp"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -119,5 +119,19 @@
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>
+
+        <CheckedTextView
+            android:id="@+id/chk_itemView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:checked = "false"
+            android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+            android:drawableEnd="@null"
+            android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+            android:drawableRight="@null"
+            android:layout_margin="10dp"/>
+
     </LinearLayout>
 </LinearLayout>
