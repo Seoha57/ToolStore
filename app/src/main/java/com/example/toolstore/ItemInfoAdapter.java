@@ -1,12 +1,15 @@
 package com.example.toolstore;
 
 import android.content.Context;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,11 +19,12 @@ import java.util.ArrayList;
 public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemInfoViewHolder> {
 
     private ArrayList<Items> itemsArrayList;
-    SparseBooleanArray itemStateArray = new SparseBooleanArray();
+    private Context context;
 
-    public ItemInfoAdapter(ArrayList<Items> arrayList)
+    public ItemInfoAdapter(Context context, ArrayList<Items> arrayList)
     {
         this.itemsArrayList = arrayList;
+        this.context = context;
     }
 
     @NonNull
@@ -32,12 +36,28 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemInfoViewHolder holder, int position) {
-        holder.tv_toolName.setText(itemsArrayList.get(position).getItemName());
-        holder.tv_toolMaker.setText(itemsArrayList.get(position).getItemMaker());
-        holder.tv_toolSize.setText(itemsArrayList.get(position).getItemSize());
+    public void onBindViewHolder(final ItemInfoViewHolder holder, final int position) {
+        holder.tv_toolName.setText(String.valueOf(itemsArrayList.get(position).getItemName()));
+        holder.tv_toolMaker.setText(String.valueOf(itemsArrayList.get(position).getItemMaker()));
+        holder.tv_toolSize.setText(String.valueOf(itemsArrayList.get(position).getItemSize()));
         holder.tv_toolAmount.setText(String.valueOf(itemsArrayList.get(position).getItemAmount()));
         holder.tv_toolPrice.setText(String.valueOf(itemsArrayList.get(position).getItemPrice()));
+
+        holder.cb_itemSelect.setText(String.valueOf(position));
+        holder.cb_itemSelect.setChecked(itemsArrayList.get(position).isChecked());
+
+        holder.cb_itemSelect.setTag(position);
+        holder.cb_itemSelect.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Integer pos = (Integer) holder.cb_itemSelect.getTag();
+                Toast.makeText(context, itemsArrayList.get(pos).getItemName() + " clicked!", Toast.LENGTH_SHORT).show();
+                if(itemsArrayList.get(position).isChecked())
+                    itemsArrayList.get(position).setChecked(false);
+                else
+                    itemsArrayList.get(position).setChecked(true);
+            }
+        });
     }
 
     @Override
@@ -45,6 +65,7 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
 
     public class ItemInfoViewHolder extends RecyclerView.ViewHolder{
         TextView tv_toolName, tv_toolMaker, tv_toolSize, tv_toolAmount, tv_toolPrice;
+        CheckBox cb_itemSelect;
         public ItemInfoViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tv_toolName = itemView.findViewById(R.id.tv_toolName);
@@ -52,41 +73,7 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
             this.tv_toolSize = itemView.findViewById(R.id.tv_toolSize);
             this.tv_toolAmount = itemView.findViewById(R.id.tv_toolAmount);
             this.tv_toolPrice = itemView.findViewById(R.id.tv_toolPrice);
+            this.cb_itemSelect = itemView.findViewById(R.id.cb_itemSelect);
         }
     }
-
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        CheckedTextView checkedTextView;
-
-        ViewHolder(View itemView)
-        {
-            super(itemView);
-            checkedTextView = itemView.findViewById(R.id.chk_itemView);
-            itemView.setOnClickListener(this);
-        }
-
-        void bind(int pos)
-        {
-            if(!itemStateArray.get(pos, false))
-                checkedTextView.setChecked(false);
-            else
-                checkedTextView.setChecked(true);
-        }
-        @Override
-        public void onClick(View v) {
-            int itemPos = getAdapterPosition();
-            if(!itemStateArray.get(itemPos, false))
-            {
-                checkedTextView.setChecked(true);
-                itemStateArray.put(itemPos, true);
-            }
-            else
-            {
-                checkedTextView.setChecked(false);
-                itemStateArray.put(itemPos, false);
-            }
-        }
-    }
-
-
 }
