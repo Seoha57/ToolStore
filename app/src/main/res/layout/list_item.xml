@@ -132,28 +132,31 @@
         android:id="@+id/layer_addToCart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="right">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/str_toolAmount"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"/>
+            android:text="Amount :"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginRight="10dp" />
 
         <EditText
             android:id="@+id/et_amountItem"
             android:hint="@string/str_toolAmount"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="100dp"/>
+            android:layout_marginRight="30dp"
+            android:inputType="numberSigned"/>
 
         <Button
             android:id="@+id/btn_addToCart"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/str_addToCart"/>
+            android:text="@string/str_addToCart"
+            android:layout_marginRight="35dp"/>
 
     </LinearLayout>
 
