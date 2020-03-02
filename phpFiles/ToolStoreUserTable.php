@@ -5,7 +5,7 @@
 	$userID = $_POST["userID"];
 	$userID = strtoupper($userID);
 
-	$sql = "CREATE TABLE IF NOT EXISTS $userID (itemName VARCHAR(30), amount INT, price INT)";
+	$sql = "CREATE TABLE IF NOT EXISTS $userID (toolName VARCHAR(30), toolMaker VARCHAR(30), toolSize VARCHAR(30), amount INT, price INT)";
 	$result = mysqli_query($con, $sql) or die ("Bad Create: $sql");
 
 ?>

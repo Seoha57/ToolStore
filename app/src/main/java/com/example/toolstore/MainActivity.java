@@ -3,6 +3,7 @@ package com.example.toolstore;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tv_id;
     private Button btn_1, btn_2, btn_3, btn_4;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btn_4 = findViewById(R.id.btn_4);
 
         Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
+        userID = intent.getStringExtra("userID");
 
         tv_id.setText("Hello, " + userID);
 
@@ -92,5 +94,14 @@ public class MainActivity extends AppCompatActivity {
         CreateNewCustomerTable createNewCustomerTable = new CreateNewCustomerTable(userID, stringListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(createNewCustomerTable);
+    }
+
+    public String getUserID()
+    {
+        return userID;
+    }
+
+    interface ContextProvider {
+        Context getContext();
     }
 }

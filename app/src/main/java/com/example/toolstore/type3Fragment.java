@@ -40,6 +40,8 @@ public class type3Fragment extends Fragment {
         itemLayoutManager = new LinearLayoutManager(getActivity());
         itemRecyclerView.setLayoutManager(itemLayoutManager);
         itemArrayList = new ArrayList<>(); //user info array list (to adapter)
+        MainActivity mainActivity = (MainActivity)getActivity();
+        String userID = mainActivity.getUserID();
         String tableName = "TOOLS_TABLE";
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -92,7 +94,7 @@ public class type3Fragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
         queue.add(itemInfoRequest);
 
-        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList);
+        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList, userID);
         itemRecyclerView.setAdapter(itemAdapter);
 
         return view;

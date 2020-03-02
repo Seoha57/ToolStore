@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,10 @@ public class type1Fragment extends Fragment {
         itemLayoutManager = new LinearLayoutManager(getActivity());
         itemRecyclerView.setLayoutManager(itemLayoutManager);
         itemArrayList = new ArrayList<>(); //user info array list (to adapter)
+
+        MainActivity mainActivity = (MainActivity)getActivity();
+        String userID = mainActivity.getUserID();
+
         String tableName = "B&N_TABLE";
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -92,9 +97,8 @@ public class type1Fragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
         queue.add(itemInfoRequest);
 
-        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList);
+        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList, userID);
         itemRecyclerView.setAdapter(itemAdapter);
-
         return view;
     }
 }
