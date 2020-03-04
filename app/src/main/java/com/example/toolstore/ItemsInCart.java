@@ -1,18 +1,18 @@
 package com.example.toolstore;
 
-public class Items {
+public class ItemsInCart {
     private String itemName;
     private String itemMaker;
     private String itemSize;
-    private int itemAmount;
-    private int itemPrice;
+    private int amount;
+    private int totalPrice;
     private boolean isChecked;
 
-    public Items() {
-    }
+    public ItemsInCart() {}
+
 
     public String getItemName() {
-            return itemName;
+        return itemName;
     }
 
     public void setItemName(String itemName) {
@@ -35,20 +35,20 @@ public class Items {
         this.itemSize = itemSize;
     }
 
-    public int getItemAmount() {
-        return itemAmount;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setItemAmount(int itemAmount) {
-        this.itemAmount = itemAmount;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
-    public int getItemPrice() {
-        return itemPrice;
+    public int getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setItemPrice(int itemPrice) {
-        this.itemPrice = itemPrice;
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public boolean isChecked() {
@@ -56,6 +56,6 @@ public class Items {
     }
 
     public void setChecked(boolean checked) {
-    isChecked = checked;
+        isChecked = checked;
     }
 }

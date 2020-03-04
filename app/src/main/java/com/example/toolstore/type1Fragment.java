@@ -50,7 +50,7 @@ public class type1Fragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.e("anyText", response);
+                    Log.e("Bolts and Nuts", response);
                     JSONArray jsonArray = new JSONArray(response);
                     JSONObject jsonObject;
                     String toolName = null, toolMaker = null, toolSize = null, toolAmount = null;

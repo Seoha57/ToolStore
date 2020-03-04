@@ -6,19 +6,17 @@
 	{
 		printf("Connect failed: %s\n", mysqli_connect_errno());
 	}
-	if (isset($_POST["table"], $_POST["toolName"], $_POST["toolMaker"], $_POST["toolSize"], $_POST["amount"], $_POST["price"]))
+	if (isset($_POST["userID"], $_POST["toolName"], $_POST["toolMaker"], $_POST["toolSize"], $_POST["amount"], $_POST["price"]))
 	{
-		$tableName = $_POST["table"];
+		$userID = $_POST["userID"];
 		$toolName = $_POST["toolName"];
 		$toolMaker = $_POST["toolMaker"];
 		$toolSize = $_POST["toolSize"];
 		$amount = $_POST["amount"];
 		$price = $_POST["price"];
 
-		$tableName = strtoupper($tableName);
-
-		$statement = mysqli_prepare($con, "INSERT INTO `$tableName` VALUES (?,?,?,?,?)");
-		mysqli_stmt_bind_param($statement, "sssii", $toolName, $toolMaker, $toolSize, $amount, $price);
+		$statement = mysqli_prepare($con, "INSERT INTO CART VALUES (?,?,?,?,?,?)");
+		mysqli_stmt_bind_param($statement, "ssssii", $userID, $toolName, $toolMaker, $toolSize, $amount, $price);
 		$response = array();
 
 		if(mysqli_stmt_execute($statement))

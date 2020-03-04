@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(), tv_id.getText().toString(), Toast.LENGTH_SHORT).show();
 
+        /*
         //Create User's Cart
         Response.Listener<String> stringListener = new Response.Listener<String>() {
             @Override
@@ -94,14 +95,11 @@ public class MainActivity extends AppCompatActivity {
         CreateNewCustomerTable createNewCustomerTable = new CreateNewCustomerTable(userID, stringListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(createNewCustomerTable);
+         */
     }
 
     public String getUserID()
     {
         return userID;
-    }
-
-    interface ContextProvider {
-        Context getContext();
     }
 }
