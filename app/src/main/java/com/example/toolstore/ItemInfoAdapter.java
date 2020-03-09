@@ -98,6 +98,7 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
                 }
                 else
                 {
+                    String toolCategory = itemsArrayList.get(position).getItemCategory();
                     String toolName = holder.tv_toolName.getText().toString();
                     String toolMaker = holder.tv_toolMaker.getText().toString();
                     String toolSize = holder.tv_toolSize.getText().toString();
@@ -120,6 +121,7 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
                                     holder.et_amountItem.getText().clear();
                                     itemsArrayList.get(position).setChecked(false);
                                     holder.cb_itemSelect.setChecked(itemsArrayList.get(position).isChecked());
+                                    holder.layer_addToCart.setVisibility(View.GONE);
                                 }
                                 else
                                 {
@@ -134,7 +136,7 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
                         }
                     };
                     // Send request to server with Volley.
-                    AddToCartRequest addToCartRequest = new AddToCartRequest(userID, toolName, toolMaker, toolSize, toolAmount, toolPrice, responseListener);
+                    AddToCartRequest addToCartRequest = new AddToCartRequest(userID, toolCategory, toolName, toolMaker, toolSize, toolAmount, toolPrice, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(context);
                     queue.add(addToCartRequest);
                 }

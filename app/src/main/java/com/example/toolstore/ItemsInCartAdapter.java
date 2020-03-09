@@ -2,6 +2,7 @@ package com.example.toolstore;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -45,8 +54,64 @@ public class ItemsInCartAdapter extends RecyclerView.Adapter<ItemsInCartAdapter.
         holder.tv_toolTotalPrice.setText(String.valueOf(itemsInCartArrayList.get(position).getTotalPrice()));
 
         holder.cb_deleteItemSelect.setChecked(itemsInCartArrayList.get(position).isChecked());
-
         holder.cb_deleteItemSelect.setTag(position);
+        holder.cb_deleteItemSelect.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                Integer pos = (Integer) holder.cb_deleteItemSelect.getTag();
+                Toast.makeText(context, itemsInCartArrayList.get(pos).getItemName() + " clicked!", Toast.LENGTH_SHORT).show();
+                if(itemsInCartArrayList.get(position).isChecked()) {
+                    holder.layer_deleteFromCart.setVisibility(View.GONE);
+                    itemsInCartArrayList.get(position).setChecked(false);
+                }
+                else {
+                    holder.layer_deleteFromCart.setVisibility(View.VISIBLE);
+                    itemsInCartArrayList.get(position).setChecked(true);
+                }
+            }
+        });
+
+        holder.btn_deleteFromCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toolName = holder.tv_toolOrderName.getText().toString();
+                String toolMaker = holder.tv_toolOrderMaker.getText().toString();
+                String toolSize = holder.tv_toolOrderSize.getText().toString();
+
+                Response.Listener<String> responsListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Remove From Cart", "Active");
+                        try {
+                            Log.e("anyText", response);
+                            JSONObject jsonObject = new JSONObject(response); // to know success or not
+                            boolean success = jsonObject.getBoolean("success");
+                            if(success)
+                            {
+                                Toast.makeText(context, "Item Deleted.", Toast.LENGTH_SHORT).show();
+
+                                itemsInCartArrayList.get(position).setChecked(false);
+                                holder.cb_deleteItemSelect.setChecked(itemsInCartArrayList.get(position).isChecked());
+                                holder.layer_deleteFromCart.setVisibility(View.GONE);
+                            }
+                            else
+                            {
+                                Toast.makeText(context, "Remove Failed", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                        catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                // Send request to server with Volley.
+                RemoveFromCartRequest removeFromCartRequest = new RemoveFromCartRequest(userID, toolName, toolMaker, toolSize, responsListener);
+                RequestQueue queue = Volley.newRequestQueue(context);
+                queue.add(removeFromCartRequest);
+            }
+        });
     }
 
     @Override

@@ -1,0 +1,9 @@
+DELIMITER $$
+CREATE TRIGGER trigger_price_adjust
+BEFORE INSERT
+ON `CART` FOR EACH ROW
+BEGIN
+SET NEW.price = NEW.price * NEW.amount;
+END $$
+
+DELIMITER;

@@ -7,23 +7,20 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddToCartRequest extends StringRequest {
+public class RemoveFromCartRequest extends StringRequest {
 
-    final static private String URL = "http://seoha57.dothome.co.kr/ToolStoreAddToCart.php";
+    final static private String URL = "http://seoha57.dothome.co.kr/ToolStoreDeleteFromCart.php";
     private Map<String, String> map;
 
-    public AddToCartRequest(String ID, String toolCategory, String toolName, String toolMaker, String toolSize, int toolAmount, int toolPrice, Response.Listener<String> listener)
+    public RemoveFromCartRequest(String ID, String toolName, String toolMaker, String toolSize, Response.Listener<String> listener)
     {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("userID", ID);
-        map.put("toolCategory", toolCategory);
         map.put("toolName", toolName);
         map.put("toolMaker", toolMaker);
         map.put("toolSize", toolSize);
-        map.put("amount", toolAmount + "");
-        map.put("price", toolPrice + "");
     }
 
     @Override

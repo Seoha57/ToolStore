@@ -76,6 +76,7 @@ public class type3Fragment extends Fragment {
                                 jsonObject = jsonArray.getJSONObject(i);
                                 String toolPrice = jsonObject.getString("price");
                                 Items items = new Items();
+                                items.setItemCategory("OTHERS");
                                 items.setItemName(toolName);
                                 items.setItemMaker(toolMaker);
                                 items.setItemSize(toolSize);

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,8 @@ public class type1Fragment extends Fragment {
     private RecyclerView.Adapter itemAdapter;
     private RecyclerView.LayoutManager itemLayoutManager;
     private ArrayList<Items> itemArrayList;
+
+    private ImageButton btn_refresh;
 
     public type1Fragment() {
 
@@ -79,6 +82,7 @@ public class type1Fragment extends Fragment {
                                 jsonObject = jsonArray.getJSONObject(i);
                                 String toolPrice = jsonObject.getString("price");
                                 Items items = new Items();
+                                items.setItemCategory("B&N");
                                 items.setItemName(toolName);
                                 items.setItemMaker(toolMaker);
                                 items.setItemSize(toolSize);

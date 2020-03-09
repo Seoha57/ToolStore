@@ -4,6 +4,7 @@ public class Items {
     private String itemName;
     private String itemMaker;
     private String itemSize;
+    private String itemCategory;
     private int itemAmount;
     private int itemPrice;
     private boolean isChecked;
@@ -57,5 +58,13 @@ public class Items {
 
     public void setChecked(boolean checked) {
     isChecked = checked;
+    }
+
+    public String getItemCategory() {
+        return itemCategory;
+    }
+
+    public void setItemCategory(String itemCategory) {
+        this.itemCategory = itemCategory;
     }
 }

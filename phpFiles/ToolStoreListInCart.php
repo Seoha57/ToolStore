@@ -18,7 +18,7 @@
 		if(mysqli_stmt_execute($statement))
 		{
 			mysqli_stmt_store_result($statement);
-			mysqli_stmt_bind_result($statement, $user, $toolName, $toolMaker, $toolSize, $amount, $price);
+			mysqli_stmt_bind_result($statement, $user, $toolCategory, $toolName, $toolMaker, $toolSize, $amount, $price);
 
 			while(mysqli_stmt_fetch($statement))
 			{

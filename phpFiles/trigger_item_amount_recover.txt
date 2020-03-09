@@ -1,0 +1,15 @@
+DELIMITER $$
+CREATE TRIGGER trigger_price_adjust
+BEFORE DELETE
+ON `CART` FOR EACH ROW
+BEGIN
+IF (OLD.category = 'B&N') THEN
+UPDATE `B&N_TABLE` SET amount = amount+OLD.amount where name=OLD.toolName AND maker=OLD.toolMaker AND size=OLD.toolSize;
+ELSEIF (OLD.category = 'TOOLS') THEN
+UPDATE `TOOLS_TABLE` SET amount = amount+OLD.amount where name=OLD.toolName AND maker=OLD.toolMaker AND size=OLD.toolSize;
+ELSE
+UPDATE `OTHERS_TABEL` SET amount = amount+OLD.amount where name=OLD.toolName AND maker=OLD.toolMaker AND size=OLD.toolSize;
+END IF;
+END $$
+
+DELIMITER;

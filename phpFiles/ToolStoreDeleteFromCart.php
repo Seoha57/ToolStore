@@ -6,18 +6,16 @@
 	{
 		printf("Connect failed: %s\n", mysqli_connect_errno());
 	}
-	if (isset($_POST["userID"], $_POST["toolCategory"], $_POST["toolName"], $_POST["toolMaker"], $_POST["toolSize"], $_POST["amount"], $_POST["price"]))
+	
+	if (isset($_POST["userID"], $_POST["toolName"], $_POST["toolMaker"], $_POST["toolSize"]))
 	{
 		$userID = $_POST["userID"];
-		$toolCategory = $_POST["toolCategory"];
 		$toolName = $_POST["toolName"];
 		$toolMaker = $_POST["toolMaker"];
 		$toolSize = $_POST["toolSize"];
-		$amount = $_POST["amount"];
-		$price = $_POST["price"];
+		
+		$statement = mysqli_prepare($con, "DELETE FROM CART WHERE userID='$userID' AND toolName='$toolName' AND toolMaker='$toolMaker' AND toolSize='$toolSize'");
 
-		$statement = mysqli_prepare($con, "INSERT INTO CART VALUES (?,?,?,?,?,?,?)");
-		mysqli_stmt_bind_param($statement, "sssssii", $userID, $toolCategory, $toolName, $toolMaker, $toolSize, $amount, $price);
 		$response = array();
 
 		if(mysqli_stmt_execute($statement))
@@ -25,6 +23,6 @@
 		else 
 			$response["success"] = false;
 	}
+	
 	echo json_encode($response);
-
 ?>

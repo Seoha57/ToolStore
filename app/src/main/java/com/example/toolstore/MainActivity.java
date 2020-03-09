@@ -1,14 +1,20 @@
 package com.example.toolstore;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +28,7 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv_id;
+    private ImageButton btn_refresh;
     private Button btn_1, btn_2, btn_3, btn_4;
     private String userID;
 
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tv_id = findViewById(R.id.tv_id);
+        btn_refresh = findViewById(R.id.btn_refresh);
         btn_1 = findViewById(R.id.btn_1);
         btn_2 = findViewById(R.id.btn_2);
         btn_3 = findViewById(R.id.btn_3);
@@ -39,7 +47,24 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userID = intent.getStringExtra("userID");
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        type1Fragment fragment1 = new type1Fragment();
+        transaction.replace(R.id.frame, fragment1); // 조각 교체
+        transaction.commit();
+
         tv_id.setText("Hello, " + userID);
+
+        btn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                MainActivity.super.onRestart();
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
+                i.putExtra("userID", userID);
+                startActivity(i);
+                finish();
+            }
+        });
 
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,20 +107,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Toast.makeText(getApplicationContext(), tv_id.getText().toString(), Toast.LENGTH_SHORT).show();
-
-        /*
-        //Create User's Cart
-        Response.Listener<String> stringListener = new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("Create Table Response", "Active");
-            }
-        };
-        // Send request to server with Volley.
-        CreateNewCustomerTable createNewCustomerTable = new CreateNewCustomerTable(userID, stringListener);
-        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-        queue.add(createNewCustomerTable);
-         */
     }
 
     public String getUserID()
