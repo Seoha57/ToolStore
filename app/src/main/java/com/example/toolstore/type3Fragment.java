@@ -42,7 +42,7 @@ public class type3Fragment extends Fragment {
         itemArrayList = new ArrayList<>(); //user info array list (to adapter)
         MainActivity mainActivity = (MainActivity)getActivity();
         String userID = mainActivity.getUserID();
-        String tableName = "TOOLS_TABLE";
+        String tableName = "OTHERS_TABEL";
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
