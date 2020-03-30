@@ -25,12 +25,19 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv_id;
     private ImageButton btn_refresh;
     private Button btn_1, btn_2, btn_3, btn_4;
     private String userID;
+
+    private ArrayList<Fragment> fragments;
+    private Integer fragPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +51,23 @@ public class MainActivity extends AppCompatActivity {
         btn_3 = findViewById(R.id.btn_3);
         btn_4 = findViewById(R.id.btn_4);
 
+        type1Fragment fragment1 = new type1Fragment();
+        type2Fragment fragment2 = new type2Fragment();
+        type3Fragment fragment3 = new type3Fragment();
+        type4Fragment fragment4 = new type4Fragment();
+
+        fragments = new ArrayList<>();
+        fragments.add(fragment1);
+        fragments.add(fragment2);
+        fragments.add(fragment3);
+        fragments.add(fragment4);
+        fragPos = 0;
+
         Intent intent = getIntent();
         userID = intent.getStringExtra("userID");
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        type1Fragment fragment1 = new type1Fragment();
-        transaction.replace(R.id.frame, fragment1); // 조각 교체
+        transaction.replace(R.id.frame, fragments.get(fragPos)); // 조각 교체
         transaction.commit();
 
         tv_id.setText("Hello, " + userID);
@@ -69,40 +87,32 @@ public class MainActivity extends AppCompatActivity {
         btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                type1Fragment fragment1 = new type1Fragment();
-                transaction.replace(R.id.frame, fragment1); // 조각 교체
-                transaction.commit(); // 새로고침 기능
+                fragPos = 0;
+                refreshFragment();
             }
         });
 
         btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                type2Fragment fragment2 = new type2Fragment();
-                transaction.replace(R.id.frame, fragment2); // 조각 교체
-                transaction.commit(); // 새로고침 기능
+                fragPos = 1;
+                refreshFragment();
             }
         });
 
         btn_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                type3Fragment fragment3 = new type3Fragment();
-                transaction.replace(R.id.frame, fragment3); // 조각 교체
-                transaction.commit(); // 새로고침 기능
+                fragPos = 2;
+                refreshFragment();
             }
         });
 
         btn_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                type4Fragment fragment4 = new type4Fragment();
-                transaction.replace(R.id.frame, fragment4); // 조각 교체
-                transaction.commit(); // 새로고침 기능
+                fragPos = 3;
+                refreshFragment();
             }
         });
 
@@ -112,5 +122,17 @@ public class MainActivity extends AppCompatActivity {
     public String getUserID()
     {
         return userID;
+    }
+
+    public void refreshFragment()
+    {
+        Log.e("refresh check", fragPos.toString());
+        Fragment currFragment = fragments.get(fragPos);
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.detach(currFragment);
+        transaction.attach(currFragment);
+        transaction.replace(R.id.frame, currFragment);
+        transaction.commit();
     }
 }

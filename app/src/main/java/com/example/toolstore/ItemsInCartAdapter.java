@@ -28,12 +28,14 @@ public class ItemsInCartAdapter extends RecyclerView.Adapter<ItemsInCartAdapter.
     private ArrayList<ItemsInCart> itemsInCartArrayList;
     private Context context;
     private String userID;
+    private MainActivity mainActivity;
 
-    public ItemsInCartAdapter(Context context, ArrayList<ItemsInCart> arrayList, String userID)
+    public ItemsInCartAdapter(Context context, ArrayList<ItemsInCart> arrayList, String userID, MainActivity mainActivity)
     {
         this.itemsInCartArrayList = arrayList;
         this.context = context;
         this.userID = userID;
+        this.mainActivity = mainActivity;
     }
 
     @NonNull
@@ -110,6 +112,9 @@ public class ItemsInCartAdapter extends RecyclerView.Adapter<ItemsInCartAdapter.
                 RemoveFromCartRequest removeFromCartRequest = new RemoveFromCartRequest(userID, toolName, toolMaker, toolSize, responsListener);
                 RequestQueue queue = Volley.newRequestQueue(context);
                 queue.add(removeFromCartRequest);
+
+                // Refresh fragment
+                mainActivity.refreshFragment();
             }
         });
     }

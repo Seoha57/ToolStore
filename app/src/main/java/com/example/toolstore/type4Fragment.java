@@ -93,7 +93,7 @@ public class type4Fragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(this.getContext());
         queue.add(itemsInCartRequest);
 
-        itemsInCartAdapter = new ItemsInCartAdapter(getContext(), itemsInCartArrayList, userID);
+        itemsInCartAdapter = new ItemsInCartAdapter(getContext(), itemsInCartArrayList, userID, mainActivity);
         itemsInCartRecyclerView.setAdapter(itemsInCartAdapter);
         return view;
     }

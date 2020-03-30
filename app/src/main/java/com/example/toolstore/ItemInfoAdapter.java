@@ -1,5 +1,6 @@
 package com.example.toolstore;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
@@ -30,12 +35,14 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
     private ArrayList<Items> itemsArrayList;
     private Context context;
     private String userID;
+    private MainActivity mainActivity;
 
-    public ItemInfoAdapter(Context context, ArrayList<Items> arrayList, String userID)
+    public ItemInfoAdapter(Context context, ArrayList<Items> arrayList, String userID, MainActivity mainActivity)
     {
         this.itemsArrayList = arrayList;
         this.context = context;
         this.userID = userID;
+        this.mainActivity = mainActivity;
     }
 
     @NonNull
@@ -139,6 +146,9 @@ public class ItemInfoAdapter extends RecyclerView.Adapter<ItemInfoAdapter.ItemIn
                     AddToCartRequest addToCartRequest = new AddToCartRequest(userID, toolCategory, toolName, toolMaker, toolSize, toolAmount, toolPrice, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(context);
                     queue.add(addToCartRequest);
+
+                    // Refresh fragment
+                    mainActivity.refreshFragment();
                 }
             }
         });

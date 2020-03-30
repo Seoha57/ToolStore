@@ -95,7 +95,7 @@ public class type2Fragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
         queue.add(itemInfoRequest);
 
-        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList, userID);
+        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList, userID, mainActivity);
         itemRecyclerView.setAdapter(itemAdapter);
 
         return view;

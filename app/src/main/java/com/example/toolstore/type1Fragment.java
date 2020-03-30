@@ -30,8 +30,6 @@ public class type1Fragment extends Fragment {
     private RecyclerView.LayoutManager itemLayoutManager;
     private ArrayList<Items> itemArrayList;
 
-    private ImageButton btn_refresh;
-
     public type1Fragment() {
 
     }
@@ -101,7 +99,7 @@ public class type1Fragment extends Fragment {
         RequestQueue queue = Volley.newRequestQueue(this.getActivity());
         queue.add(itemInfoRequest);
 
-        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList, userID);
+        itemAdapter = new ItemInfoAdapter(getContext(), itemArrayList, userID, mainActivity);
         itemRecyclerView.setAdapter(itemAdapter);
         return view;
     }

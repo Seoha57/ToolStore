@@ -150,7 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginRight="30dp"
-            android:inputType="numberSigned"/>
+            android:inputType="number"/>
 
         <Button
             android:id="@+id/btn_addToCart"
