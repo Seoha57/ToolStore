@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".AdminCheckoutList"></activity>
+        <activity android:name=".UserCheckoutList" />
         <activity android:name=".UserInfoActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -23,7 +25,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".AdminActivity" />
-        <activity android:name=".AddTools"/>
+        <activity android:name=".AddTools" />
     </application>
 
 </manifest>

@@ -5,7 +5,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_cart"
@@ -14,8 +15,16 @@
             android:scrollbars="vertical"
             android:scrollbarThumbVertical="@android:color/darker_gray"
             android:scrollbarSize="5dp"
-            android:scrollbarFadeDuration="0"/>
+            android:scrollbarFadeDuration="0"
+            android:layout_weight="1"/>
 
+        <Button
+            android:id="@+id/btn_checkout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:layout_gravity="center"
+            android:text="@string/str_checkout"
+            android:background="@drawable/custom_button4"/>
     </LinearLayout>
-
 </FrameLayout>

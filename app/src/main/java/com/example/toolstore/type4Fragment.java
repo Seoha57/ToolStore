@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +30,7 @@ public class type4Fragment extends Fragment {
     private RecyclerView.Adapter itemsInCartAdapter;
     private RecyclerView.LayoutManager itemsInCartLayoutManager;
     private ArrayList<ItemsInCart> itemsInCartArrayList;
+    private Button btn_checkout;
 
     public type4Fragment() {
     }
@@ -40,9 +43,10 @@ public class type4Fragment extends Fragment {
         itemsInCartLayoutManager = new LinearLayoutManager(getActivity());
         itemsInCartRecyclerView.setLayoutManager(itemsInCartLayoutManager);
         itemsInCartArrayList = new ArrayList<>();
+        btn_checkout = view.findViewById(R.id.btn_checkout);
 
-        MainActivity mainActivity = (MainActivity)getActivity();
-        String userID = mainActivity.getUserID();
+        final MainActivity mainActivity = (MainActivity)getActivity();
+        final String userID = mainActivity.getUserID();
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
@@ -90,11 +94,43 @@ public class type4Fragment extends Fragment {
             }
         };
         ItemsInCartRequest itemsInCartRequest = new ItemsInCartRequest(userID, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(this.getContext());
+        final RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(itemsInCartRequest);
 
         itemsInCartAdapter = new ItemsInCartAdapter(getContext(), itemsInCartArrayList, userID, mainActivity);
         itemsInCartRecyclerView.setAdapter(itemsInCartAdapter);
+
+        btn_checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Response.Listener<String> stringListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Checkout", "Active");
+                        try {
+                            JSONObject jsonObject = new JSONObject(response); // to know success or not
+                            Log.e("Checkout", response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if(success)
+                            {
+                                Toast.makeText(getContext(), "Successfully Checkout", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(getContext(), "Failed Checkout", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                CheckoutRequest checkoutRequest = new CheckoutRequest(userID, stringListener);
+                queue.add(checkoutRequest);
+                mainActivity.refreshFragment();
+            }
+        });
+
         return view;
     }
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="checkout_state">
+        <item>
+            Not Checked
+        </item>
+        <item>
+            Checked
+        </item>
+        <item>
+            Shipped
+        </item>
+        <item>
+            Delivered
+        </item>
+    </string-array>
+</resources>

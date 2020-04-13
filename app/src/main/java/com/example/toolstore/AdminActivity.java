@@ -12,6 +12,7 @@ import android.widget.Toast;
 public class AdminActivity extends AppCompatActivity {
     TextView tv_admin;
     Button btn_userInfo, btn_addTools, btn_checkOrders;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +25,7 @@ public class AdminActivity extends AppCompatActivity {
         btn_checkOrders = findViewById(R.id.btn_checkOrders);
 
         Intent intent = getIntent();
-        String userID = intent.getStringExtra("userID");
+        userID = intent.getStringExtra("userID");
 
         tv_admin.setText("Hi, " + userID);
 
@@ -47,6 +48,9 @@ public class AdminActivity extends AppCompatActivity {
         btn_checkOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent change = new Intent(AdminActivity.this, AdminCheckoutList.class);
+                change.putExtra("userID", userID);
+                startActivity(change);
             }
         });
 

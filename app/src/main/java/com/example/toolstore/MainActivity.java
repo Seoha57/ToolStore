@@ -32,7 +32,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tv_id;
-    private ImageButton btn_refresh;
+    private ImageButton btn_viewOrder;
     private Button btn_1, btn_2, btn_3, btn_4;
     private String userID;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tv_id = findViewById(R.id.tv_id);
-        btn_refresh = findViewById(R.id.btn_refresh);
+        btn_viewOrder = findViewById(R.id.btn_viewOrder);
         btn_1 = findViewById(R.id.btn_1);
         btn_2 = findViewById(R.id.btn_2);
         btn_3 = findViewById(R.id.btn_3);
@@ -72,15 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
         tv_id.setText("Hello, " + userID);
 
-        btn_refresh.setOnClickListener(new View.OnClickListener() {
+        btn_viewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                MainActivity.super.onRestart();
-                Intent i = new Intent(MainActivity.this, MainActivity.class);
-                i.putExtra("userID", userID);
-                startActivity(i);
-                finish();
+                Intent intent1 = new Intent(MainActivity.this, UserCheckoutList.class);
+                intent1.putExtra("userID", userID);
+                startActivity(intent1);
             }
         });
 

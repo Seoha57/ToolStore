@@ -80,7 +80,7 @@ public class ItemsInCartAdapter extends RecyclerView.Adapter<ItemsInCartAdapter.
                 String toolMaker = holder.tv_toolOrderMaker.getText().toString();
                 String toolSize = holder.tv_toolOrderSize.getText().toString();
 
-                Response.Listener<String> responsListener = new Response.Listener<String>() {
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.e("Remove From Cart", "Active");
@@ -99,7 +99,6 @@ public class ItemsInCartAdapter extends RecyclerView.Adapter<ItemsInCartAdapter.
                             else
                             {
                                 Toast.makeText(context, "Remove Failed", Toast.LENGTH_SHORT).show();
-                                return;
                             }
                         }
                         catch (JSONException e)
@@ -109,7 +108,7 @@ public class ItemsInCartAdapter extends RecyclerView.Adapter<ItemsInCartAdapter.
                     }
                 };
                 // Send request to server with Volley.
-                RemoveFromCartRequest removeFromCartRequest = new RemoveFromCartRequest(userID, toolName, toolMaker, toolSize, responsListener);
+                RemoveFromCartRequest removeFromCartRequest = new RemoveFromCartRequest(userID, toolName, toolMaker, toolSize, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(context);
                 queue.add(removeFromCartRequest);
 

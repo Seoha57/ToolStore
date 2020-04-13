@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/btn_refresh"
+            android:id="@+id/btn_viewOrder"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"

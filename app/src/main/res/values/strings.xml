@@ -26,4 +26,8 @@
     <string name="str_describe">Describe</string>
     <string name="str_addToCart">ADD TO CART</string>
     <string name="str_deleteFromCart">DELETE FROM CART</string>
+    <string name="str_cancelOrder">Cancel Order</string>
+    <string name="str_checkout">Proceed to Checkout</string>
+    <string name="str_checkoutState">Current State</string>
+    <string name="str_updateState">Update Current State</string>
 </resources>
