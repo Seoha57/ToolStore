@@ -100,7 +100,7 @@ public class type4Fragment extends Fragment {
         itemsInCartAdapter = new ItemsInCartAdapter(getContext(), itemsInCartArrayList, userID, mainActivity);
         itemsInCartRecyclerView.setAdapter(itemsInCartAdapter);
 
-        btn_checkout.setOnClickListener(new View.OnClickListener() {
+         btn_checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Response.Listener<String> stringListener = new Response.Listener<String>() {
@@ -111,16 +111,12 @@ public class type4Fragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response); // to know success or not
                             Log.e("Checkout", response);
                             boolean success = jsonObject.getBoolean("success");
-                            if(success)
-                            {
+                            if (success) {
                                 Toast.makeText(getContext(), "Successfully Checkout", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(getContext(), "Failed Checkout", Toast.LENGTH_SHORT).show();
                             }
-                        } catch (JSONException e)
-                        {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -129,8 +125,7 @@ public class type4Fragment extends Fragment {
                 queue.add(checkoutRequest);
                 mainActivity.refreshFragment();
             }
-        });
-
+         });
         return view;
     }
 }

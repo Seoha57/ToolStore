@@ -12,10 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AdminCheckoutList"></activity>
+        <activity android:name=".credit"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".AdminCheckoutList" />
         <activity android:name=".UserCheckoutList" />
         <activity android:name=".UserInfoActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".digipen_logo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

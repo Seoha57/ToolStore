@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,19 +20,20 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText et_id, et_password;
-    private Button btn_register, btn_login;
+    private Button btn_register, btn_login, btn_credit;
 
-    private long backBtnTime = 0;
+    private boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        et_id = (EditText)findViewById(R.id.et_id);
-        et_password = (EditText)findViewById(R.id.et_password);
-        btn_login = (Button)findViewById(R.id.btn_login);
-        btn_register = (Button)findViewById(R.id.btn_register);
+        et_id = findViewById(R.id.et_id);
+        et_password = findViewById(R.id.et_password);
+        btn_login = findViewById(R.id.btn_login);
+        btn_register = findViewById(R.id.btn_register);
+        btn_credit = findViewById(R.id.btn_credit);
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,24 +98,32 @@ public class LoginActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
+
+        btn_credit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent creditScene = new Intent(LoginActivity.this, credit.class);
+                startActivity(creditScene);
+            }
+        });
     }
 
     @Override
     public void onBackPressed() {
-        long curTime = System.currentTimeMillis();
-        long gapTime = curTime - backBtnTime;
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
-        if(0 <= gapTime && 2000 >= gapTime)
-        {
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-            intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        }
-        else
-        {
-            backBtnTime = curTime;
-            Toast.makeText(this, "Press one more times to close.", Toast.LENGTH_SHORT).show();
-        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

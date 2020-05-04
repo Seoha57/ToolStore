@@ -60,7 +60,7 @@
             android:layout_weight="1"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:text="@string/type1"
-            android:textSize="13dp"
+            android:textSize="12sp"
             android:gravity="center"
             android:textColor="@android:color/white"/>
 
